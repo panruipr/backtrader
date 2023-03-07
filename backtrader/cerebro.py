@@ -996,6 +996,18 @@ class Cerebro(with_metaclass(MetaParams, object)):
             plotter.show()
 
         return figs
+    
+    def render(self, echart=None, **kwargs):
+        if not echart:
+            from . import echarts
+            echart = echarts.Echarts_Line(**kwargs)
+
+
+        for stratlist in self.runstrats:
+            for si, strat in enumerate(stratlist):
+                echart.render(strat)
+        pass
+        
 
     def __call__(self, iterstrat):
         '''
